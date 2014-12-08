@@ -14,32 +14,31 @@ item::item(std::unique_ptr<shape> shape, material const& material)
 utils::option<intersection_point> item::intersect(ray const& r) const {
     if (auto i = shape_->intersect(r))
     {
-        auto ip = intersection_point
-            {i.value(), shape_->normal_at(i.value()),*this};
-        return utils::some(ip);
+        return utils::some(intersection_point{i.value(), *this});
     }
     return utils::none;
 }
+
+linear::direction3d item::normal_at(linear::point3d const& point) const
+{ return shape_->normal_at(point); }
 
 color item::calculate_ambient_color(color const& ambient_light) const
 { return material_.calculate_ambient_color(ambient_light); }
 
 color item::calculate_diffuse_color(color const& diffuse_light,
                                     linear::direction3d const& direction,
-                                    intersection_point const& point) const
+                                    linear::direction3d const& normal) const
 {
     return material_.calculate_diffuse_color(
             diffuse_light,
             direction,
-            point.normal_);
+            normal);
 }
 
 
 intersection_point::intersection_point(point_on_ray const& point,
-                                       linear::direction3d const& normal,
                                        item const& item)
     : point_{point}
-    , normal_{normal}
     , item_{item}
 {}
 

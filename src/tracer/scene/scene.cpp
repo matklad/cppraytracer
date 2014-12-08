@@ -42,12 +42,17 @@ color scene::trace(ray const& r) const {
 color scene::calculate_light(intersection_point const& p) const {
     color const ambient_light{.9, .9, .9};
     color sum_color{0, 0, 0};
-    sum_color += p.get_item().calculate_ambient_color(ambient_light);
+    // sum_color += p.get_item().calculate_ambient_color(ambient_light);
     // for (auto const& source: light_sources_) {
     //     linear::direction3d const d = linear::direction3d(p - source.position());
         // sum_color += p.get_item()
         //     .calculate_diffuse_color(source.color(), d, p);
     // }
+    color const light{1, 1, 1};
+    linear::point3d position{-20, 10, 10};
+    linear::direction3d light_direction{-(position - p)};
+    sum_color += p.get_item().calculate_diffuse_color(
+        light, light_direction, p.get_item().normal_at(p));
     return sum_color;
 }
 

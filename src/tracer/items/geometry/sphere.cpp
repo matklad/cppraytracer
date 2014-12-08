@@ -10,7 +10,7 @@ sphere::sphere(linear::point3d const& center, double radius)
 {}
 
 utils::option<point_on_ray> sphere::intersect_impl(ray const& r) const {
-    linear::vector3d const shift = r.origin() - center_;
+    linear::vector3d const shift = center_ - r.origin();
     double const a = dot_product(r.direction(), r.direction());
     double const b = 2 * dot_product(r.direction(), shift);
     double const c = dot_product(shift, shift) - radius_ * radius_;
