@@ -10,7 +10,7 @@ struct sphere: shape {
     sphere(linear::point3d const& center, double radius);
 
 private:
-    utils::option<point_on_ray> intersect_impl(ray const& r) const override;
+    utils::option<double> intersect_impl(ray const& r) const override;
     linear::direction3d normal_at_impl(linear::point3d const& p) const override;
 
     linear::point3d center_;

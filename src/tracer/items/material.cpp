@@ -1,3 +1,4 @@
+#include <linear/direction3d.h>
 #include <tracer/images/color.h>
 #include <tracer/items/material.h>
 
@@ -16,6 +17,5 @@ color material::calculate_diffuse_color(
     double const k = dot_product(light_direction, -normal);
     return color_ * diffuse_light * k;
 }
-
 
 } // namespace tracer

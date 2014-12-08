@@ -9,7 +9,7 @@ sphere::sphere(linear::point3d const& center, double radius)
     , radius_(radius)
 {}
 
-utils::option<point_on_ray> sphere::intersect_impl(ray const& r) const {
+utils::option<double> sphere::intersect_impl(ray const& r) const {
     linear::vector3d const shift = center_ - r.origin();
     double const a = dot_product(r.direction(), r.direction());
     double const b = 2 * dot_product(r.direction(), shift);
@@ -19,7 +19,7 @@ utils::option<point_on_ray> sphere::intersect_impl(ray const& r) const {
             double const t = solution.smallest_root > 0
                 ? solution.smallest_root
                 : solution.biggest_root;
-            return utils::some(r.point_along(t));
+            return utils::some(t);
         }
     };
     return utils::none;

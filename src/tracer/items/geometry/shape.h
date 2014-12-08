@@ -20,7 +20,7 @@ struct shape {
     virtual ~shape();
 
 private:
-    virtual utils::option<point_on_ray> intersect_impl(ray const& r) const = 0;
+    virtual utils::option<double> intersect_impl(ray const& r) const = 0;
     virtual linear::direction3d normal_at_impl(
         linear::point3d const& point) const = 0;
 };
