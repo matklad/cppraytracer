@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <memory>
-#include <tracer/items/shapes/shape.h>
+#include <tracer/items/geometry/shape.h>
 #include <tracer/images/image.h>
 #include <tracer/scene/camera.h>
 

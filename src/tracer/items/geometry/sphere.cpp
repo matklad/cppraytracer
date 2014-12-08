@@ -1,4 +1,4 @@
-#include <tracer/items/shapes/sphere.h>
+#include <tracer/items/geometry/sphere.h>
 #include <utils/option.h>
 #include <linear/utils.h>
 

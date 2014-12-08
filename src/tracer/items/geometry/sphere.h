@@ -2,7 +2,7 @@
 #include <array>
 
 #include <utils/option.h>
-#include <tracer/items/shapes/shape.h>
+#include <tracer/items/geometry/shape.h>
 
 namespace tracer {
 

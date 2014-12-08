@@ -15,7 +15,7 @@ paths = [
     'build/linear/*.cpp',
     'build/tracer/images/*.cpp',
     'build/tracer/light/*.cpp',
-    'build/tracer/items/shapes/*.cpp',
+    'build/tracer/items/geometry/*.cpp',
     'build/tracer/items/materials/*.cpp',
     'build/tracer/items/*.cpp',
     'build/tracer/scene/*.cpp',

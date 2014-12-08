@@ -6,8 +6,8 @@
 #include <linear/point3d.h>
 #include <tracer/scene/camera.h>
 #include <tracer/scene/scene.h>
-#include <tracer/items/shapes/shape.h>
-#include <tracer/items/shapes/sphere.h>
+#include <tracer/items/geometry/shape.h>
+#include <tracer/items/geometry/sphere.h>
 #include <tracer/images/ppm.h>
 
 using namespace tracer;
