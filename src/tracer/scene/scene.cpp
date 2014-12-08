@@ -1,12 +1,14 @@
 #include <memory>
+#include <vector>
 
 #include <tracer/scene/scene.h>
+#include <tracer/items/item.h>
 
 namespace tracer {
 
-scene::scene(camera const camera, shapes shapes)
+scene::scene(camera const camera, std::vector<item> items)
     : camera_{camera}
-    , shapes_(std::move(shapes))
+    , items_(std::move(items))
 {}
 
 image scene::render() const
@@ -22,12 +24,18 @@ image scene::render() const
 }
 
 color scene::trace(ray const r) const {
-    for (auto const& s: shapes_) {
-        if (s->intersect(r)) {
-            return color(0, 0, 1);
+    utils::option<intersection_point> intersection = utils::none;
+    for (auto const& obj: items_) {
+        if (auto const some_i = obj.intersect(r)) {
+            intersection_point const i = some_i.value();
+            if (!intersection || (intersection && i < intersection.value())) {
+                intersection = i;
+            }
         }
     }
-    return color(1, 1, 1);
+    return intersection
+        ? intersection.value().get_item().calculate_color()
+        : color(0, 0, 0);
 }
 
 }

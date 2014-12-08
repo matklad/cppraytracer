@@ -12,13 +12,13 @@
 
 using namespace tracer;
 
-shapes make_shapes() {
-    shapes result;
-    result.push_back(std::make_unique<sphere>(linear::point3d{0, -8, 0}, 10));
-    result.push_back(std::make_unique<sphere>(linear::point3d{0,  8, 0}, 10));
-
+std::vector<item> make_items() {
+    std::vector<item> result;
+    material blue{{0, 0, 1}};
+    material red{{1, 0, 0}};
+    result.push_back(item{std::make_unique<sphere>(linear::point3d{0, -8, 0}, 10), red});
+    result.push_back(item{std::make_unique<sphere>(linear::point3d{0, 8, 0}, 10), blue});
     return result;
-
 };
 
 camera make_camera() {
@@ -32,7 +32,7 @@ camera make_camera() {
 }
 
 int main() {
-    scene scene{make_camera(), make_shapes()};
+    scene scene{make_camera(), make_items()};
     image im = scene.render();
     write_ppm(std::cout, im);
 }

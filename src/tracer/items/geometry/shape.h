@@ -4,10 +4,14 @@
 #include <memory>
 
 #include <utils/option.h>
+#include <utils/operators.h>
+
 #include <linear/linear.h>
 #include <tracer/light/ray.h>
 
 namespace tracer {
+
+struct shape;
 
 struct shape {
     utils::option<point_on_ray> intersect(ray r) const;
@@ -17,7 +21,5 @@ struct shape {
 private:
     virtual utils::option<point_on_ray> intersect_impl(ray r) const = 0;
 };
-
-typedef std::vector<std::unique_ptr<shape>> shapes;
 
 } // namespace tracer

@@ -26,13 +26,8 @@ bool point_on_ray::operator==(point_on_ray rhs) const
 { return distance_ == rhs.distance_; }
 
 bool point_on_ray::operator<(point_on_ray rhs) const
-{ return distance_ == rhs.distance_; }
+{ return distance_ < rhs.distance_; }
 
 point_on_ray::operator linear::point3d() const { return point_; };
-
-bool operator!=(point_on_ray lhs, point_on_ray rhs) { return !(lhs == rhs); }
-bool operator<=(point_on_ray lhs, point_on_ray rhs) { return !(rhs < lhs); }
-bool operator> (point_on_ray lhs, point_on_ray rhs) { return rhs < lhs; }
-bool operator>=(point_on_ray lhs, point_on_ray rhs) { return !(lhs < rhs); }
 
 } // namespace tracer

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utils/operators.h>
 #include <linear/linear.h>
 
 namespace tracer {
@@ -19,11 +20,13 @@ private:
     linear::direction3d direction_;
 };
 
-struct point_on_ray {
+struct point_on_ray
+    : private utils::comparable<point_on_ray>
+{
     friend struct ray;
 
     bool operator==(point_on_ray rhs) const;
-    bool operator<(point_on_ray rhs) const;
+    bool operator< (point_on_ray rhs) const;
     operator linear::point3d() const;
 private:
     point_on_ray(double distance, linear::point3d point);
@@ -31,10 +34,5 @@ private:
     double distance_;
     linear::point3d point_;
 };
-
-bool operator!=(point_on_ray lhs, point_on_ray rhs);
-bool operator<=(point_on_ray lhs, point_on_ray rhs);
-bool operator> (point_on_ray lhs, point_on_ray rhs);
-bool operator>=(point_on_ray lhs, point_on_ray rhs);
 
 } // namespace tracer

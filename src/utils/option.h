@@ -22,6 +22,14 @@ struct option {
     option& operator=(option const& other) {
         destroy_value();
         copy_value(other);
+        return *this;
+    }
+
+    option& operator=(T const& value) {
+        destroy_value();
+        empty_ = false;
+        make_value(value);
+        return *this;
     }
 
     ~option() { destroy_value(); }
@@ -37,8 +45,10 @@ private:
     void destroy_value() { if (!empty_) { get_value().~T(); } }
     void copy_value(option const& other) {
         empty_ = other.empty_;
-        if (!other.empty_) { new (data_) T(other.value()); }
+        if (!other.empty_) { make_value(other.value()); }
     }
+
+    void make_value(T const& value) { new (data_) T(value); }
 
     bool empty_;
     char data_[sizeof(T)];
