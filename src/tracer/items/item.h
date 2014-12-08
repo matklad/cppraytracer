@@ -12,9 +12,9 @@ namespace tracer {
 struct intersection_point;
 
 struct item {
-    item(std::unique_ptr<shape> shape, material material);
+    item(std::unique_ptr<shape> shape, material const& material);
 
-    utils::option<intersection_point> intersect(ray r) const;
+    utils::option<intersection_point> intersect(ray const& r) const;
     color calculate_color() const;
 private:
     std::unique_ptr<shape> shape_;
@@ -30,7 +30,7 @@ struct intersection_point
 
 private:
     friend struct item;
-    intersection_point(point_on_ray point, item const& item);
+    intersection_point(point_on_ray const& point, item const& item);
 
     point_on_ray point_;
     item const& item_;

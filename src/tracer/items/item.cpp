@@ -6,12 +6,12 @@
 
 namespace tracer {
 
-item::item(std::unique_ptr<shape> shape, material material)
+item::item(std::unique_ptr<shape> shape, material const& material)
     : shape_{std::move(shape)}
     , material_{material}
 {}
 
-utils::option<intersection_point> item::intersect(ray r) const {
+utils::option<intersection_point> item::intersect(ray const& r) const {
     if (auto i = shape_->intersect(r))
     {
         return utils::some(intersection_point{i.value(), *this});
@@ -22,7 +22,8 @@ utils::option<intersection_point> item::intersect(ray r) const {
 color item::calculate_color() const
 { return material_.calculate_color(); }
 
-intersection_point::intersection_point(point_on_ray point, item const& item)
+intersection_point::intersection_point(point_on_ray const& point,
+                                       item const& item)
     : point_{point}
     , item_{item}
 {}

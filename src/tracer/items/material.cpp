@@ -3,7 +3,7 @@
 
 namespace tracer {
 
-material::material(color c): color_(c) {}
+material::material(color const& c): color_(c) {}
 
 color material::calculate_color() const { return color_; }
 

@@ -7,10 +7,10 @@
 namespace tracer {
 
 struct sphere: shape {
-    sphere(linear::point3d center, double radius);
+    sphere(linear::point3d const& center, double radius);
 
 private:
-    virtual utils::option<point_on_ray> intersect_impl(ray r) const;
+    virtual utils::option<point_on_ray> intersect_impl(ray const& r) const;
 
     linear::point3d center_;
     double radius_;

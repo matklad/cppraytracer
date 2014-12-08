@@ -9,7 +9,7 @@ namespace tracer {
 
 struct image {
     image(unsigned width, unsigned height);
-    image(std::array<unsigned, 2> dimensions);
+    image(std::array<unsigned, 2> const& dimensions);
 
     std::array<unsigned, 2> dimensions() const;
     color const& operator()(unsigned x, unsigned y) const;

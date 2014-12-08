@@ -4,12 +4,12 @@
 
 namespace tracer {
 
-sphere::sphere(linear::point3d const center, double const radius)
+sphere::sphere(linear::point3d const& center, double radius)
     : center_(center)
     , radius_(radius)
 {}
 
-utils::option<point_on_ray> sphere::intersect_impl(ray const r) const {
+utils::option<point_on_ray> sphere::intersect_impl(ray const& r) const {
     linear::vector3d const shift = r.origin() - center_;
     double const a = dot_product(r.direction(), r.direction());
     double const b = 2 * dot_product(r.direction(), shift);

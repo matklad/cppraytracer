@@ -25,6 +25,7 @@ struct camera {
     camera(camera_parameters const& parameters);
     ray ray_for_pixel(unsigned x, unsigned y) const;
     std::array<unsigned, 2> resolution() const;
+
 private:
     linear::point3d position_;
     linear::direction3d view_direction_;

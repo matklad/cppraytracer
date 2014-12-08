@@ -4,7 +4,7 @@
 namespace tracer {
 
 struct material {
-    material(color color);
+    material(color const& color);
     color calculate_color() const;
 
 private:

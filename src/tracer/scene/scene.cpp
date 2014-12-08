@@ -6,7 +6,7 @@
 
 namespace tracer {
 
-scene::scene(camera const camera, std::vector<item> items)
+scene::scene(camera const& camera, std::vector<item> items)
     : camera_{camera}
     , items_(std::move(items))
 {}
@@ -23,7 +23,7 @@ image scene::render() const
     return result;
 }
 
-color scene::trace(ray const r) const {
+color scene::trace(ray const& r) const {
     utils::option<intersection_point> intersection = utils::none;
     for (auto const& obj: items_) {
         if (auto const some_i = obj.intersect(r)) {

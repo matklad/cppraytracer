@@ -14,12 +14,12 @@ namespace tracer {
 struct shape;
 
 struct shape {
-    utils::option<point_on_ray> intersect(ray r) const;
+    utils::option<point_on_ray> intersect(ray const& r) const;
 
     virtual ~shape();
 
 private:
-    virtual utils::option<point_on_ray> intersect_impl(ray r) const = 0;
+    virtual utils::option<point_on_ray> intersect_impl(ray const& r) const = 0;
 };
 
 } // namespace tracer

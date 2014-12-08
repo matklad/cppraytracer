@@ -11,8 +11,8 @@ struct color
     color(double r, double g, double b);
     color();
 
-    color& operator+=(color other);
-    color& operator-=(color other);
+    color& operator+=(color const& other);
+    color& operator-=(color const& other);
     color& operator*=(double alpha);
 
     double r() const;

@@ -9,11 +9,12 @@
 namespace tracer {
 
 struct scene {
-    scene(camera camera, std::vector<item> items);
+    scene(camera const& camera, std::vector<item> items);
 
     image render() const;
+
 private:
-    color trace(ray r) const;
+    color trace(ray const&r) const;
 
     camera camera_;
     std::vector<item> items_;
