@@ -9,7 +9,7 @@ namespace {
 using namespace linear;
 
 direction3d calculate_view_direction(camera_parameters const& parameters)
-{ return direction3d(parameters.look_at - parameters.position); }
+{ return direction_from_to(parameters.position, parameters.look_at); }
 
 direction3d calculate_up_direction(camera_parameters const& parameters) {
     direction3d const view = calculate_view_direction(parameters);

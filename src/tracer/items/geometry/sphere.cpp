@@ -26,7 +26,7 @@ utils::option<point_on_ray> sphere::intersect_impl(ray const& r) const {
 };
 
 linear::direction3d sphere::normal_at_impl(linear::point3d const& p) const {
-    return linear::direction3d(p - center_);
+    return linear::direction_from_to(center_, p);
 }
 
 } // namespace tracer

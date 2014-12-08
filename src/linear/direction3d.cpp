@@ -13,4 +13,7 @@ direction3d::direction3d(double const a, double const b, double const c)
 direction3d cross_product(direction3d const& a, direction3d const& b)
 { return direction3d{cross_product(static_cast<vector3d>(a), b)}; }
 
+direction3d direction_from_to(point3d const& from, point3d const& to)
+{ return direction3d(to - from); }
+
 } // namespace linear

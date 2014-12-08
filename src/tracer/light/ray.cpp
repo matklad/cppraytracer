@@ -4,7 +4,7 @@
 namespace tracer {
 
 ray ray::from_to(linear::point3d const& from, linear::point3d const& to)
-{ return ray(from, linear::direction3d{to - from}); }
+{ return ray(from, linear::direction_from_to(from, to)); }
 
 ray::ray(linear::point3d const& origin, linear::direction3d const& direction3d)
     : origin_{origin}

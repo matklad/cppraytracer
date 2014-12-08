@@ -50,7 +50,7 @@ color scene::calculate_light(intersection_point const& p) const {
     // }
     color const light{1, 1, 1};
     linear::point3d position{-20, 10, 10};
-    linear::direction3d light_direction{-(position - p)};
+    linear::direction3d light_direction = linear::direction_from_to(position, p);
     sum_color += p.get_item().calculate_diffuse_color(
         light, light_direction, p.get_item().normal_at(p));
     return sum_color;
