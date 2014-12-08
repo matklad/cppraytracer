@@ -1,5 +1,5 @@
 #include <tracer/items/shapes/sphere.h>
-#include <tracer/lib/option.h>
+#include <utils/option.h>
 #include <linear/utils.h>
 
 namespace tracer {
@@ -9,7 +9,7 @@ sphere::sphere(linear::point3d const center, double const radius)
     , radius_(radius)
 {}
 
-lib::option<point_on_ray> sphere::intersect_impl(ray const r) const {
+utils::option<point_on_ray> sphere::intersect_impl(ray const r) const {
     linear::vector3d const shift = r.origin() - center_;
     double const a = dot_product(r.direction(), r.direction());
     double const b = 2 * dot_product(r.direction(), shift);
@@ -19,10 +19,10 @@ lib::option<point_on_ray> sphere::intersect_impl(ray const r) const {
             double const t = solution.smallest_root > 0
                 ? solution.smallest_root
                 : solution.biggest_root;
-            return lib::some(r.point_along(t));
+            return utils::some(r.point_along(t));
         }
     };
-    return lib::none;
+    return utils::none;
 };
 
 } // namespace tracer

@@ -1,11 +1,13 @@
 #pragma once
 
 #include <array>
-#include <tracer/lib/operators.h>
+#include <utils/operators.h>
 
 namespace tracer {
 
-struct color: private add_sub<color> {
+struct color
+    : private utils::add_sub<color>
+{
     color(double r, double g, double b);
     color();
 

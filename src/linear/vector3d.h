@@ -2,11 +2,13 @@
 #include <iostream>
 #include <array>
 
-#include <tracer/lib/operators.h>
+#include <utils/operators.h>
 
 namespace linear {
 
-struct vector3d: private add_sub<vector3d> {
+struct vector3d
+    : private utils::add_sub<vector3d>
+{
     vector3d(double x, double y, double z);
     vector3d();
     vector3d& operator+=(vector3d rhs);

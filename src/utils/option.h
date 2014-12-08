@@ -1,6 +1,6 @@
 #pragma once
 
-namespace lib {
+namespace utils {
 
 template<typename T>
 struct option;
@@ -47,4 +47,4 @@ private:
 template<typename T>
 option<T> some(T const& value) { return option<T>(value); };
 
-} // namespace lib
+} // namespace utils
