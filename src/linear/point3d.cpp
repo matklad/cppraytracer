@@ -10,25 +10,25 @@ point3d::point3d()
     : point3d(0.0, 0.0, 0.0)
 {}
 
-point3d& point3d::operator+=(vector3d const rhs)
+point3d& point3d::operator+=(vector3d const& rhs)
 {
     radius_vector_ += rhs;
     return *this;
 }
 
-point3d& point3d::operator-=(vector3d const rhs)
+point3d& point3d::operator-=(vector3d const& rhs)
 {
     radius_vector_ -= rhs;
     return *this;
 }
 
-vector3d point3d::operator-(point3d rhs) const
+vector3d point3d::operator-(point3d const& rhs) const
 { return radius_vector_ - rhs.radius_vector_; }
 
-point3d operator+(point3d lhs, vector3d const rhs)
+point3d operator+(point3d lhs, vector3d const& rhs)
 { return lhs += rhs; }
 
-point3d operator-(point3d lhs, vector3d const rhs)
+point3d operator-(point3d lhs, vector3d const& rhs)
 { return lhs -= rhs; }
 
 } // namespace linear
