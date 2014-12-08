@@ -15,6 +15,7 @@ struct scene {
 
 private:
     color trace(ray const&r) const;
+    color calculate_light(intersection_point const& intersection) const;
 
     camera camera_;
     std::vector<item> items_;

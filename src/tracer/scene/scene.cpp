@@ -1,6 +1,7 @@
 #include <memory>
 #include <vector>
 
+#include <linear/direction3d.h>
 #include <tracer/scene/scene.h>
 #include <tracer/items/item.h>
 
@@ -11,8 +12,7 @@ scene::scene(camera const& camera, std::vector<item> items)
     , items_(std::move(items))
 {}
 
-image scene::render() const
-{
+image scene::render() const {
     image result(camera_.resolution());
     for (unsigned x = 0; x < camera_.resolution()[0]; ++x) {
         for (unsigned y = 0; y < camera_.resolution()[1]; ++y) {
@@ -33,9 +33,22 @@ color scene::trace(ray const& r) const {
             }
         }
     }
+    color const background_color{0, 0, 0};
     return intersection
-        ? intersection.value().get_item().calculate_color()
-        : color(0, 0, 0);
+        ? calculate_light(intersection.value())
+        : background_color;
+}
+
+color scene::calculate_light(intersection_point const& p) const {
+    color const ambient_light{.9, .9, .9};
+    color sum_color{0, 0, 0};
+    sum_color += p.get_item().calculate_ambient_color(ambient_light);
+    // for (auto const& source: light_sources_) {
+    //     linear::direction3d const d = linear::direction3d(p - source.position());
+        // sum_color += p.get_item()
+        //     .calculate_diffuse_color(source.color(), d, p);
+    // }
+    return sum_color;
 }
 
 }

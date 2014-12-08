@@ -11,8 +11,9 @@ struct color
     color(double r, double g, double b);
     color();
 
-    color& operator+=(color const& other);
-    color& operator-=(color const& other);
+    color& operator+=(color const& rhs);
+    color& operator-=(color const& rhs);
+    color& operator*=(color const& rhs);
     color& operator*=(double alpha);
 
     double r() const;
@@ -23,6 +24,7 @@ private:
     std::array<double, 3> data_;
 };
 
+color operator*(color lhs, color const& rhs);
 color operator*(double alpha, color c);
 color operator*(color c, double alpha);
 
