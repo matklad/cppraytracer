@@ -1,12 +1,23 @@
+#include <memory>
+
 #include <tracer/items/item.h>
 #include <tracer/items/geometry/shape.h>
+#include <tracer/items/geometry/sphere.h>
 #include <tracer/items/material.h>
 #include <tracer/images/color.h>
 #include <utils/option.h>
 
 namespace tracer {
 
-item::item(std::unique_ptr<shape> shape, material const& material)
+item item::make_sphere(material const& material,
+                    linear::point3d const& position,
+                    double const radius) {
+    return {material, std::make_unique<sphere>(position, radius)};
+}
+
+item::~item() {}
+
+item::item(material const& material, std::unique_ptr<shape> shape)
     : shape_{std::move(shape)}
     , material_{material}
 {}

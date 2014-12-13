@@ -1,13 +1,11 @@
 #include <iostream>
 #include <vector>
-#include <memory>
 #include <fstream>
 
 #include <linear/point3d.h>
 #include <tracer/scene/camera.h>
 #include <tracer/scene/scene.h>
 #include <tracer/items/geometry/shape.h>
-#include <tracer/items/geometry/sphere.h>
 #include <tracer/images/ppm.h>
 
 using namespace tracer;
@@ -16,8 +14,9 @@ std::vector<item> make_items() {
     std::vector<item> result;
     material blue{{0, 0, 1}};
     material red{{1, 0, 0}};
-    result.push_back(item{std::make_unique<sphere>(linear::point3d{0, -8, 0}, 10), red});
-    result.push_back(item{std::make_unique<sphere>(linear::point3d{0, 8, 0}, 10), blue});
+
+    result.push_back(item::make_sphere(red,  {0, -8, 0}, 10));
+    result.push_back(item::make_sphere(blue, {0, 8, 0}, 10));
     return result;
 };
 

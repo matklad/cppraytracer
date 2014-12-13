@@ -3,7 +3,6 @@
 
 #include <utils/option.h>
 #include <linear/direction3d.h>
-#include <tracer/items/geometry/shape.h>
 #include <tracer/items/material.h>
 #include <tracer/light/ray.h>
 #include <tracer/images/color.h>
@@ -11,9 +10,15 @@
 namespace tracer {
 
 struct intersection_point;
+struct shape;
 
 struct item {
-    item(std::unique_ptr<shape> shape, material const& material);
+    static item make_sphere(material const& material,
+                            linear::point3d const& position,
+                            double radius);
+    item(item&&) = default;
+    item& operator=(item&&) = default;
+    ~item();
 
     utils::option<intersection_point> intersect(ray const& r) const;
     linear::direction3d normal_at(linear::point3d const& point) const;
@@ -24,6 +29,8 @@ struct item {
                                   linear::direction3d const& normal) const;
 
 private:
+    item(material const& material, std::unique_ptr<shape> shape);
+
     std::unique_ptr<shape> shape_;
     material material_;
 };
@@ -36,6 +43,7 @@ struct intersection_point
     bool operator< (intersection_point const& rhs) const;
 
     operator linear::point3d() const;
+
 private:
     friend struct item;
     intersection_point(point_on_ray const& point, item const& item);

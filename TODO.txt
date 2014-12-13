@@ -1,0 +1,3 @@
+* builder for scene
+
+* fix mess with intersection point
