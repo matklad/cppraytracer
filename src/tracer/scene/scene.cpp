@@ -4,6 +4,10 @@
 #include <linear/direction3d.h>
 #include <tracer/scene/scene.h>
 #include <tracer/items/item.h>
+#include <tracer/images/image.h>
+#include <tracer/images/color.h>
+#include <tracer/images/normalized_color.h>
+
 
 namespace tracer {
 
@@ -17,7 +21,7 @@ image scene::render() const {
     for (unsigned x = 0; x < camera_.resolution()[0]; ++x) {
         for (unsigned y = 0; y < camera_.resolution()[1]; ++y) {
             ray const r = camera_.ray_for_pixel(x, y);
-            result(x, y) = trace(r);
+            result(x, y) = normalized_color{trace(r)};
         }
     }
     return result;

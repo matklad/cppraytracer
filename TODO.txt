@@ -1,3 +1,3 @@
-* builder for scene
+* fix unsound direction
 
 * fix mess with intersection point

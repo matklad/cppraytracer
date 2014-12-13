@@ -15,6 +15,8 @@ struct color
     color& operator-=(color const& rhs);
     color& operator*=(color const& rhs);
     color& operator*=(double alpha);
+    color& operator/=(double alpha);
+
 
     double r() const;
     double g() const;
@@ -27,5 +29,8 @@ private:
 color operator*(color lhs, color const& rhs);
 color operator*(double alpha, color c);
 color operator*(color c, double alpha);
+color operator/(double alpha, color c);
+color operator/(color c, double alpha);
+
 
 } // namespace tracer
