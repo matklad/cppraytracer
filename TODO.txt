@@ -1,3 +1,1 @@
-* fix unsound direction
-
 * fix mess with intersection point

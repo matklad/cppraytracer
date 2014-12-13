@@ -24,6 +24,9 @@ scene_builder& scene_builder::screen_size(std::array<double, 2> const& size)
 scene_builder& scene_builder::resolution(std::array<unsigned, 2> const& resolution)
 { resolution_ = resolution; return *this; }
 
+scene_builder& scene_builder::ambient_light(normalized_color const& light)
+{ ambient_light_ = light; return *this; }
+
 scene_builder& scene_builder::add_item(item i)
 {
     items_.push_back(std::move(i));
@@ -48,7 +51,7 @@ scene scene_builder::build() {
         focal_distance_,
         screen{screen_size_, resolution_}
     };
-    return {cam, std::move(items_)};
+    return {cam, ambient_light_, std::move(items_)};
 }
 
 } // namespace tracer

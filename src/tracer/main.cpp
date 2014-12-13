@@ -23,6 +23,7 @@ int main() {
         .resolution({{640u * upsampling, 480u * upsampling}})
         .add_item(item::make_sphere(red,  {0, -8, 0}, 10))
         .add_item(item::make_sphere(blue, {0,  8, 0}, 10))
+        .ambient_light(normalized_color{{.3, .3, .3}})
         .build();
 
     write_ppm(std::cout, upsample(scene.render(), upsampling));
