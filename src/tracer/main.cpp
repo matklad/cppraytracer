@@ -22,12 +22,12 @@ std::vector<item> make_items() {
 };
 
 camera make_camera() {
-    linear::point3d position{-20, 0, 0};
-    linear::point3d look_at{0, 0, 0};
-    linear::direction3d up{0, 0, 1};
-    double focus = 10;
-    screen s{{{32, 24}}, {{640u, 480u}}};
-    camera_parameters params{position, look_at, up, focus, s};
+    camera_parameters params;
+    params.position = {-20, 0, 0};
+    params.look_at = {0, 0, 0};
+    params.up_direction = {0, 0, 1};
+    params.focal_distance = 10;
+    params.screen = {{{32, 24}}, {{640u, 480u}}};
     return camera{params};
 }
 

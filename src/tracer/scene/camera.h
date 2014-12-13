@@ -14,8 +14,8 @@ struct screen
 
 struct camera_parameters {
     linear::point3d position;
-    linear::point3d look_at;
-    linear::direction3d up_direction;
+    linear::point3d look_at = {0, 0, 0};
+    linear::direction3d up_direction = linear::direction3d(0, 0, 1);
     double focal_distance;
     screen screen;
 };
