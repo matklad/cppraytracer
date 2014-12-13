@@ -6,6 +6,7 @@
 #include <tracer/images/image.h>
 #include <tracer/images/normalized_color.h>
 #include <tracer/scene/camera.h>
+#include <tracer/light/light_source.h>
 
 namespace tracer {
 
@@ -19,6 +20,7 @@ private:
 
     scene(camera const& camera,
           normalized_color const& ambient_light_,
+          std::vector<light_source> lights,
           std::vector<item> items);
 
     normalized_color color_at_pixel(unsigned x, unsigned y) const;
@@ -28,6 +30,7 @@ private:
 
     camera camera_;
     normalized_color ambient_light_;
+    std::vector<light_source> lights_;
     std::vector<item> items_;
 };
 
