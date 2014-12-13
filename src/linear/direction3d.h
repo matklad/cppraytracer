@@ -4,14 +4,14 @@
 
 namespace linear {
 
-struct direction3d
-    : vector3d
-{
+struct direction3d {
     explicit direction3d(vector3d const& v);
     direction3d(double a, double b, double c);
 
+    operator vector3d() const;
+
 private:
-    direction3d() = delete;
+    vector3d directrion_;
 };
 
 direction3d cross_product(direction3d const& a, direction3d const& b);
