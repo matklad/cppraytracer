@@ -1,1 +1,3 @@
 * fix mess with intersection point
+
+* check consts

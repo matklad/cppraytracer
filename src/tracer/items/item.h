@@ -23,12 +23,8 @@ struct item {
     utils::option<intersection_point> intersect(ray const& r) const;
     linear::direction3d normal_at(linear::point3d const& point) const;
 
-    color calculate_ambient_color(color const& ambient_light) const;
-    color calculate_diffuse_color(color const& diffuse_light,
-                                  linear::direction3d const& direction,
-                                  linear::direction3d const& normal) const;
-
 private:
+    friend struct intersection_point;
     item(material const& material, std::unique_ptr<shape> shape);
 
     std::unique_ptr<shape> shape_;
@@ -38,12 +34,13 @@ private:
 struct intersection_point
     : utils::comparable<intersection_point>
 {
-    item const& get_item() const;
+    operator linear::point3d() const;
     bool operator==(intersection_point const& rhs) const;
     bool operator< (intersection_point const& rhs) const;
 
-    operator linear::point3d() const;
-
+    color calculate_ambient_color(color const& ambient_light) const;
+    color calculate_diffuse_color(color const& diffuse_light,
+                                  linear::direction3d const& direction) const;
 private:
     friend struct item;
     intersection_point(point_on_ray const& point, item const& item);

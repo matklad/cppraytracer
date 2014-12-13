@@ -19,11 +19,11 @@ int main() {
         .up_direction({0, 0, 1})
         .camera_position({-20, 0, 0})
         .focal_distance(10)
-        .screen_size({{32.0, 24.0}})
+        .screen_size({{16.0, 12.0}})
         .resolution({{640u * upsampling, 480u * upsampling}})
-        .add_item(item::make_sphere(red,  {0, -8, 0}, 10))
-        .add_item(item::make_sphere(blue, {0,  8, 0}, 10))
-        .ambient_light(normalized_color{{.3, .3, .3}})
+        .add_item(item::make_sphere(blue, {0,  0, 0}, 5))
+        .add_item(item::make_sphere(red,  {3, -8, 0}, 5))
+        .ambient_light(normalized_color{{.1, .1, .1}})
         .build();
 
     write_ppm(std::cout, upsample(scene.render(), upsampling));

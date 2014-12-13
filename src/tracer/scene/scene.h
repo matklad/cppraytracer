@@ -20,6 +20,9 @@ private:
     scene(camera const& camera,
           normalized_color const& ambient_light_,
           std::vector<item> items);
+
+    normalized_color color_at_pixel(unsigned x, unsigned y) const;
+    utils::option<intersection_point> first_hit(ray const& r) const;
     color trace(ray const&r) const;
     color calculate_light(intersection_point const& intersection) const;
 

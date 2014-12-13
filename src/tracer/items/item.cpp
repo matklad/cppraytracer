@@ -44,27 +44,13 @@ utils::option<intersection_point> item::intersect(ray const& r) const {
 linear::direction3d item::normal_at(linear::point3d const& point) const
 { return shape_->normal_at(point); }
 
-color item::calculate_ambient_color(color const& ambient_light) const
-{ return material_.calculate_ambient_color(ambient_light); }
-
-color item::calculate_diffuse_color(color const& diffuse_light,
-                                    linear::direction3d const& direction,
-                                    linear::direction3d const& normal) const
-{
-    return material_.calculate_diffuse_color(
-            diffuse_light,
-            direction,
-            normal);
-}
-
-
 intersection_point::intersection_point(point_on_ray const& point,
                                        item const& item)
     : point_{point}
     , item_{item}
 {}
 
-item const& intersection_point::get_item() const { return item_; }
+intersection_point::operator linear::point3d() const { return point_; }
 
 bool intersection_point::operator==(intersection_point const& rhs) const
 { return point_ == rhs.point_; }
@@ -72,6 +58,18 @@ bool intersection_point::operator==(intersection_point const& rhs) const
 bool intersection_point::operator<(intersection_point const& rhs) const
 { return point_ < rhs.point_; }
 
-intersection_point::operator linear::point3d() const { return point_; }
+color intersection_point::calculate_ambient_color(color const& ambient_light) const
+{ return item_.material_.calculate_ambient_color(ambient_light); }
+
+color intersection_point::calculate_diffuse_color(color const& diffuse_light,
+                                    linear::direction3d const& direction) const
+{
+    linear::direction3d const normal = item_.normal_at(point_);
+    return item_.material_.calculate_diffuse_color(
+        diffuse_light,
+        direction,
+        normal);
+}
+
 
 } // namespace tracer
