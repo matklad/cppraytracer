@@ -43,9 +43,10 @@ struct intersection_point
                                   linear::direction3d const& direction) const;
 private:
     friend struct item;
-    intersection_point(point_on_ray const& point, item const& item);
+    intersection_point(double t, ray const& ray, item const& item);
 
-    point_on_ray point_;
+    double t_;
+    ray const& ray_;
     item const& item_;
 };
 

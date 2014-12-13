@@ -64,7 +64,7 @@ color scene::calculate_light(intersection_point const& p) const {
         point3d position;
     };
 
-    light_source const l{{.8, .8, .8}, {-10, 4, -4}};
+    light_source const l{{.8, .8, .8}, {-100, 100, -40}};
     auto light_sources = {l};
 
     for (auto const& l: light_sources) {

@@ -21,8 +21,8 @@ int main() {
         .focal_distance(10)
         .screen_size({{16.0, 12.0}})
         .resolution({{640u * upsampling, 480u * upsampling}})
-        .add_item(item::make_sphere(blue, {0,  0, 0}, 5))
-        .add_item(item::make_sphere(red,  {3, -8, 0}, 5))
+        .add_item(item::make_sphere(blue, {0,  2, 0}, 5))
+        .add_item(item::make_sphere(red,  {3, -7, 0}, 5))
         .ambient_light(normalized_color{{.1, .1, .1}})
         .build();
 

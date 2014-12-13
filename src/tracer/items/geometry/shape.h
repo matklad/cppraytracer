@@ -14,7 +14,7 @@ namespace tracer {
 struct shape;
 
 struct shape {
-    utils::option<point_on_ray> intersect(ray const& r) const;
+    utils::option<double> intersect(ray const& r) const;
     linear::direction3d normal_at(linear::point3d const& point) const;
 
     virtual ~shape();

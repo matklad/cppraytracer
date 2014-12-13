@@ -36,7 +36,7 @@ item::item(material const& material, std::unique_ptr<shape> shape)
 utils::option<intersection_point> item::intersect(ray const& r) const {
     if (auto i = shape_->intersect(r))
     {
-        return utils::some(intersection_point{i.value(), *this});
+        return utils::some(intersection_point{i.value(), r, *this});
     }
     return utils::none;
 }
@@ -44,19 +44,21 @@ utils::option<intersection_point> item::intersect(ray const& r) const {
 linear::direction3d item::normal_at(linear::point3d const& point) const
 { return shape_->normal_at(point); }
 
-intersection_point::intersection_point(point_on_ray const& point,
-                                       item const& item)
-    : point_{point}
+intersection_point::intersection_point(double t, ray const& ray, item const& item)
+    : t_{t}
+    , ray_{ray}
     , item_{item}
 {}
 
-intersection_point::operator linear::point3d() const { return point_; }
+intersection_point::operator linear::point3d() const {
+    return ray_.point_along(t_);
+}
 
 bool intersection_point::operator==(intersection_point const& rhs) const
-{ return point_ == rhs.point_; }
+{ return t_ == rhs.t_; }
 
 bool intersection_point::operator<(intersection_point const& rhs) const
-{ return point_ < rhs.point_; }
+{ return t_ < rhs.t_; }
 
 color intersection_point::calculate_ambient_color(color const& ambient_light) const
 { return item_.material_.calculate_ambient_color(ambient_light); }
@@ -64,7 +66,7 @@ color intersection_point::calculate_ambient_color(color const& ambient_light) co
 color intersection_point::calculate_diffuse_color(color const& diffuse_light,
                                     linear::direction3d const& direction) const
 {
-    linear::direction3d const normal = item_.normal_at(point_);
+    linear::direction3d const normal = item_.normal_at(*this);
     return item_.material_.calculate_diffuse_color(
         diffuse_light,
         direction,
