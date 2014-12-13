@@ -5,7 +5,6 @@
 #include <linear/point3d.h>
 #include <tracer/scene/camera.h>
 #include <tracer/scene/scene.h>
-#include <tracer/items/geometry/shape.h>
 #include <tracer/images/ppm.h>
 
 using namespace tracer;
@@ -16,7 +15,7 @@ std::vector<item> make_items() {
     material red{{1, 0, 0}};
 
     result.push_back(item::make_sphere(red,  {0, -8, 0}, 10));
-    result.push_back(item::make_sphere(blue, {0, 8, 0}, 10));
+    result.push_back(item::make_sphere(blue, {0,  8, 0}, 10));
     return result;
 };
 

@@ -17,6 +17,17 @@ item item::make_sphere(material const& material,
 
 item::~item() {}
 
+item::item(item&& other)
+    : shape_(std::move(other.shape_))
+    , material_(std::move(other.material_))
+{}
+
+item& item::operator=(item&& other) {
+    shape_ = std::move(other.shape_);
+    material_ = std::move(other.material_);
+    return *this;
+}
+
 item::item(material const& material, std::unique_ptr<shape> shape)
     : shape_{std::move(shape)}
     , material_{material}

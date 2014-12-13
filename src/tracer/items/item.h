@@ -16,8 +16,8 @@ struct item {
     static item make_sphere(material const& material,
                             linear::point3d const& position,
                             double radius);
-    item(item&&) = default;
-    item& operator=(item&&) = default;
+    item(item&&);
+    item& operator=(item&&);
     ~item();
 
     utils::option<intersection_point> intersect(ray const& r) const;
