@@ -14,15 +14,6 @@ struct screen
     std::array<unsigned, 2> resolution;
 };
 
-struct camera_parameters {
-    linear::point3d position;
-    linear::point3d look_at = {0, 0, 0};
-    linear::direction3d up_direction = linear::direction3d(0, 0, 1);
-    double focal_distance;
-    screen screen;
-};
-
-
 struct camera {
     ray ray_for_pixel(unsigned x, unsigned y) const;
     std::array<unsigned, 2> resolution() const;
