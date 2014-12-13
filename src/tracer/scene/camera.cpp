@@ -4,28 +4,20 @@
 #include <linear/linear.h>
 
 namespace tracer {
-
-namespace {
 using namespace linear;
 
-direction3d calculate_view_direction(camera_parameters const& parameters)
-{ return direction_from_to(parameters.position, parameters.look_at); }
-
-direction3d calculate_up_direction(camera_parameters const& parameters) {
-    direction3d const view = calculate_view_direction(parameters);
-    direction3d const right = cross_product(view, parameters.up_direction);
-    return cross_product(right, view);
-}
-
-}
-
-camera::camera(camera_parameters const& parameters)
-    : position_(parameters.position)
-    , view_direction_(calculate_view_direction(parameters))
-    , up_direction_(calculate_up_direction(parameters))
-    , right_direction_(cross_product(view_direction_, up_direction_))
-    , focal_distance_(parameters.focal_distance)
-    , screen_(parameters.screen)
+camera::camera(linear::point3d const& position,
+               linear::direction3d const& view_direction,
+               linear::direction3d const& up_direction,
+               linear::direction3d const& right_direction,
+               double const focal_distance,
+               screen const& screen)
+    : position_(position)
+    , view_direction_(view_direction)
+    , up_direction_(up_direction)
+    , right_direction_(right_direction)
+    , focal_distance_(focal_distance)
+    , screen_(screen)
 {}
 
 ray camera::ray_for_pixel(unsigned x, unsigned y) const {

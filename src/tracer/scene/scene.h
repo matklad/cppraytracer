@@ -8,12 +8,15 @@
 
 namespace tracer {
 
-struct scene {
-    scene(camera const& camera, std::vector<item> items);
+struct scene_builder;
 
+struct scene {
     image render() const;
 
 private:
+    friend struct scene_builder;
+
+    scene(camera const& camera, std::vector<item> items);
     color trace(ray const&r) const;
     color calculate_light(intersection_point const& intersection) const;
 

@@ -10,8 +10,8 @@
 namespace tracer {
 
 item item::make_sphere(material const& material,
-                    linear::point3d const& position,
-                    double const radius) {
+                       linear::point3d const& position,
+                       double const radius) {
     return {material, std::make_unique<sphere>(position, radius)};
 }
 

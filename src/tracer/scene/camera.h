@@ -6,6 +6,8 @@
 
 namespace tracer {
 
+struct scene_builder;
+
 struct screen
 {
     std::array<double, 2> dimensions;
@@ -22,11 +24,18 @@ struct camera_parameters {
 
 
 struct camera {
-    camera(camera_parameters const& parameters);
     ray ray_for_pixel(unsigned x, unsigned y) const;
     std::array<unsigned, 2> resolution() const;
 
 private:
+    friend struct scene_builder;
+    camera(linear::point3d const& position,
+           linear::direction3d const& view_direction,
+           linear::direction3d const& up_direction,
+           linear::direction3d const& right_direction,
+           double focal_distance,
+           screen const& screen);
+
     linear::point3d position_;
     linear::direction3d view_direction_;
     linear::direction3d up_direction_;
