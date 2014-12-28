@@ -18,4 +18,8 @@ normalized_color::normalized_color()
 
 normalized_color::operator color() const { return color_; }
 
+double normalized_color::r() const { return color_.r(); };
+double normalized_color::g() const { return color_.g(); };
+double normalized_color::b() const { return color_.b(); };
+
 } // namespace tracer

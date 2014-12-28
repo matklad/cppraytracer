@@ -2,16 +2,16 @@
 #include <tracer/images/ppm.h>
 
 void tracer::write_ppm(std::ostream &os, image const& im) {
-    size_t const width = im.dimensions()[0];
-    size_t const height = im.dimensions()[1];
-    unsigned const max_val = 255;
+    auto const width = im.dimensions()[0];
+    auto const height = im.dimensions()[1];
+    auto const max_val = 255u;
     os << "P6\n"
        << width << " " << height << "\n"
        << max_val << "\n";
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x)
+    for (auto y = 0u; y < height; ++y) {
+        for (auto x = 0u; x < width; ++x)
         {
-            color const c = im(x, y);
+            auto const c = im(x, y);
             char const pixel[3] = {char(c.r() * max_val),
                                    char(c.g() * max_val),
                                    char(c.b() * max_val)};

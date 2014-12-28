@@ -26,11 +26,11 @@ normalized_color& image::operator()(unsigned const x, unsigned const y) {
 
 image upsample(image const& im, unsigned rate) {
     image result{im.dimensions()[0] / rate, im.dimensions()[1] / rate};
-    for (unsigned x = 0; x < result.dimensions()[0]; ++x) {
-        for (unsigned y = 0; y < result.dimensions()[1]; ++y) {
+    for (auto x = 0u; x < result.dimensions()[0]; ++x) {
+        for (auto y = 0u; y < result.dimensions()[1]; ++y) {
             color sum;
-            for (unsigned dx = 0; dx < rate; ++dx) {
-                for (unsigned dy = 0; dy < rate; ++dy) {
+            for (auto dx = 0u; dx < rate; ++dx) {
+                for (auto dy = 0u; dy < rate; ++dy) {
                     sum += im(x * rate + dx, y * rate + dy);
                 }
             }

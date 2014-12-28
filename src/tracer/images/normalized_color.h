@@ -10,6 +10,9 @@ struct normalized_color {
 
     operator color() const;
 
+    double r() const;
+    double g() const;
+    double b() const;
 private:
     color color_;
 };
