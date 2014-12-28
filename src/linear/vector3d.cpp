@@ -15,14 +15,14 @@ vector3d::vector3d()
 {}
 
 vector3d& vector3d::operator+=(vector3d const& rhs) {
-    for (size_t i = 0; i < dimension_; ++i) {
+    for (auto i = 0u; i < dimension_; ++i) {
         coordinates_[i] += rhs.coordinates_[i];
     }
     return *this;
 }
 
 vector3d& vector3d::operator-=(vector3d const& rhs) {
-    for (size_t i = 0; i < dimension_; ++i) {
+    for (auto i = 0u; i < dimension_; ++i) {
         coordinates_[i] -= rhs.coordinates_[i];
     }
     return *this;
