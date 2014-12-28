@@ -15,6 +15,7 @@ int main() {
     material const red{{1, .1, .1}};
     material const white{{1, 1, 1}};
     unsigned const upsampling = 2;
+
     scene const scene = scene_builder()
         .center({0, 0, 0})
         .up_direction({0, 0, 1})

@@ -18,6 +18,4 @@ struct comparable
     friend T operator>=(T const& lhs, T const& rhs) { return !(rhs < lhs); }
 };
 
-
-
-}
+} // namespace utils
