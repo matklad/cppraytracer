@@ -1,11 +1,11 @@
 import os
 
 VariantDir('build', 'src', duplicate=0)
+
 env=Environment(
     CPPPATH='src',
     CXX='clang++',
-    CXXFLAGS='-std=c++14',
-    # LINKFLAGS = '-stdlib=libc++',
+    CXXFLAGS='-std=c++14 -Wall -Wextra -Werror',
     SCONS_CXX_STANDARD="c++14",
     ENV={'TERM': os.environ['TERM']},
     variant_dir='build'

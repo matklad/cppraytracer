@@ -38,7 +38,7 @@ normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const
     normalized_color const background_color{{0.03, 0.03, 0.03}};
     ray const r = camera_.ray_for_pixel(x, y);
     if (auto const hit = first_hit(r)) {
-        return normalized_color{calculate_light(hit.value())};
+        return normalized_color{calculate_light(*hit)};
     } else {
         return background_color;
     }
@@ -49,8 +49,8 @@ utils::option<intersection_point> scene::first_hit(ray const& r) const {
     utils::option<intersection_point> hit = utils::none;
     for (auto const& obj: items_) {
         if (auto const some_i = obj.intersect(r)) {
-            intersection_point const i = some_i.value();
-            if (!hit || (hit && i < hit.value())) {
+            intersection_point const i = *some_i;
+            if (!hit || (hit && i < *hit)) {
                 hit = i;
             }
         }

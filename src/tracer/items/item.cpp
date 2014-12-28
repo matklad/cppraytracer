@@ -36,7 +36,7 @@ item::item(material const& material, std::unique_ptr<shape> shape)
 utils::option<intersection_point> item::intersect(ray const& r) const {
     if (auto i = shape_->intersect(r))
     {
-        return utils::some(intersection_point{i.value(), r, *this});
+        return utils::some(intersection_point{*i, r, *this});
     }
     return utils::none;
 }

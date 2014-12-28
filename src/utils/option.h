@@ -22,12 +22,13 @@ struct option {
     option& operator=(option const& other);
     option& operator=(T const& value);
 
+    T& operator*();
+    T const& operator*() const;
+    T* operator->();
+    T const* operator->() const;
+
     bool is_empty() const;
     explicit operator bool() const;
-    T& operator*();
-    T const& operator* () const;
-
-    T value() const;
 
 private:
     option(T value);
@@ -73,21 +74,26 @@ auto option<T>::operator=(T const& value) -> option& {
 }
 
 template<typename T>
+auto option<T>::operator->() -> T*
+{ return reinterpret_cast<T*>(data_); }
+
+template<typename T>
+auto option<T>::operator->() const -> T const*
+{ return reinterpret_cast<T const*>(data_); }
+
+template<typename T>
+auto option<T>::operator*() -> T&
+{ return *operator->(); }
+
+template<typename T>
+auto option<T>::operator*() const -> T const&
+{ return *operator->();; }
+
+template<typename T>
 bool option<T>::is_empty() const { return empty_; };
 
 template<typename T>
 option<T>::operator bool() const { return !is_empty(); }
-
-template<typename T>
-auto option<T>::value() const -> T { return operator*(); };
-
-template<typename T>
-auto option<T>::operator*() -> T&
-{ return *reinterpret_cast<T*>(data_); }
-
-template<typename T>
-auto option<T>::operator*() const -> T const&
-{ return *reinterpret_cast<T const*>(data_); }
 
 template<typename T>
 void option<T>::destroy_value() {
@@ -97,7 +103,7 @@ void option<T>::destroy_value() {
 template<typename T>
 void option<T>::copy_from(option const& other) {
     empty_ = other.empty_;
-    if (!other.empty_) { make_value(other.value()); }
+    if (!other.empty_) { make_value(*other); }
 }
 
 template<typename T>
