@@ -24,11 +24,13 @@ struct option {
 
     bool is_empty() const;
     explicit operator bool() const;
+    T& operator*();
+    T const& operator* () const;
+
     T value() const;
 
 private:
     option(T value);
-    T const& get_value() const;
     void destroy_value();
     void copy_from(option const& other);
     void make_value(T const& value);
@@ -77,14 +79,20 @@ template<typename T>
 option<T>::operator bool() const { return !is_empty(); }
 
 template<typename T>
-auto option<T>::value() const -> T { return get_value(); };
+auto option<T>::value() const -> T { return operator*(); };
 
 template<typename T>
-auto option<T>::get_value() const -> T const&
+auto option<T>::operator*() -> T&
+{ return *reinterpret_cast<T*>(data_); }
+
+template<typename T>
+auto option<T>::operator*() const -> T const&
 { return *reinterpret_cast<T const*>(data_); }
 
 template<typename T>
-void option<T>::destroy_value() { if (!empty_) { get_value().~T(); } }
+void option<T>::destroy_value() {
+    if (!empty_) { operator*().~T(); }
+}
 
 template<typename T>
 void option<T>::copy_from(option const& other) {
