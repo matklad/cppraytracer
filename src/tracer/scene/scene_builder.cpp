@@ -37,13 +37,12 @@ scene_builder scene_builder::add_item(item i) &&
 }
 
 scene scene_builder::build() && {
-    using namespace linear;
-    direction3d const view_direction =
+    auto const view_direction =
         direction_from_to(camera_position_, center_);
 
-    direction3d const right_direction =
+    auto const right_direction =
         cross_product(view_direction, up_direction_);
-    direction3d const true_up_direction =
+    auto const true_up_direction =
         cross_product(right_direction, view_direction);
 
     camera const cam{
