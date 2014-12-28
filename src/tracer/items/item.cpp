@@ -50,9 +50,8 @@ intersection_point::intersection_point(double t, ray const& ray, item const& ite
     , item_{item}
 {}
 
-intersection_point::operator linear::point3d() const {
-    return ray_.point_along(t_);
-}
+intersection_point::operator linear::point3d() const
+{ return ray_.point_along(t_); }
 
 bool intersection_point::operator==(intersection_point const& rhs) const
 { return t_ == rhs.t_; }
@@ -66,12 +65,11 @@ color intersection_point::calculate_ambient_color(color const& ambient_light) co
 color intersection_point::calculate_diffuse_color(color const& diffuse_light,
                                     linear::direction3d const& direction) const
 {
-    linear::direction3d const normal = item_.normal_at(*this);
+    auto const normal = item_.normal_at(*this);
     return item_.material_.calculate_diffuse_color(
         diffuse_light,
         direction,
         normal);
 }
-
 
 } // namespace tracer

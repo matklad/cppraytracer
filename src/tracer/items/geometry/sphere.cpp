@@ -10,13 +10,13 @@ sphere::sphere(linear::point3d const& center, double radius)
 {}
 
 utils::option<double> sphere::intersect_impl(ray const& r) const {
-    linear::vector3d const shift = center_ - r.origin();
-    double const a = dot_product(r.direction(), r.direction());
-    double const b = 2 * dot_product(r.direction(), shift);
-    double const c = dot_product(shift, shift) - radius_ * radius_;
+    auto const shift = center_ - r.origin();
+    auto const a = dot_product(r.direction(), r.direction());
+    auto const b = 2 * dot_product(r.direction(), shift);
+    auto const c = dot_product(shift, shift) - radius_ * radius_;
     if (auto const solution = linear::solve_quadratic_equation(a, b, c)) {
         if (solution.biggest_root > 0) {
-            double const t = solution.smallest_root > 0
+            auto const t = solution.smallest_root > 0
                 ? solution.smallest_root
                 : solution.biggest_root;
             return utils::some(t);

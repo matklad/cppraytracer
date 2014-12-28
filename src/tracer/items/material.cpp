@@ -14,7 +14,7 @@ color material::calculate_diffuse_color(
     linear::direction3d const& light_direction,
     linear::direction3d const& normal) const
 {
-    double const k = dot_product(light_direction, -normal);
+    auto const k = dot_product(light_direction, -normal);
     return color_ * diffuse_light * k;
 }
 
