@@ -9,10 +9,7 @@
 #include <tracer/images/color.h>
 #include <tracer/images/normalized_color.h>
 
-
 namespace tracer {
-
-using namespace linear;
 
 scene::scene(camera const& camera,
              normalized_color const& ambient_light_,
@@ -26,8 +23,8 @@ scene::scene(camera const& camera,
 
 image scene::render() const {
     image result(camera_.resolution());
-    for (unsigned x = 0; x < camera_.resolution()[0]; ++x) {
-        for (unsigned y = 0; y < camera_.resolution()[1]; ++y) {
+    for (auto x = 0u; x < camera_.resolution()[0]; ++x) {
+        for (auto y = 0u; y < camera_.resolution()[1]; ++y) {
             result(x, y) = color_at_pixel(x, y);
         }
     }
@@ -36,7 +33,7 @@ image scene::render() const {
 
 normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const {
     normalized_color const background_color{{0.03, 0.03, 0.03}};
-    ray const r = camera_.ray_for_pixel(x, y);
+    auto const r = camera_.ray_for_pixel(x, y);
     if (auto const hit = first_hit(r)) {
         return normalized_color{calculate_light(*hit)};
     } else {
@@ -48,10 +45,9 @@ normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const
 utils::option<intersection_point> scene::first_hit(ray const& r) const {
     utils::option<intersection_point> hit = utils::none;
     for (auto const& obj: items_) {
-        if (auto const some_i = obj.intersect(r)) {
-            intersection_point const i = *some_i;
-            if (!hit || (hit && i < *hit)) {
-                hit = i;
+        if (auto const i = obj.intersect(r)) {
+            if (!hit || (hit && *i < *hit)) {
+                hit = *i;
             }
         }
     }
@@ -64,13 +60,13 @@ color scene::calculate_light(intersection_point const& p) const {
 
     struct light_source {
         color color;
-        point3d position;
+        linear::point3d position;
     };
 
     for (auto const& l: lights_) {
-        direction3d light_direction = direction_from_to(l.position(), p);
-        ray const pre_out_ray = ray::from_to(p, l.position());
-        ray const out_ray = ray::from_to(pre_out_ray.point_along(.001), l.position());
+        auto const light_direction = direction_from_to(l.position(), p);
+        auto const pre_out_ray = ray::from_to(p, l.position());
+        auto const out_ray = ray::from_to(pre_out_ray.point_along(.001), l.position());
         if (!first_hit(out_ray)) {
             sum_color += p.calculate_diffuse_color(l.color(), light_direction);
         }
