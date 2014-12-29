@@ -37,7 +37,7 @@ utils::option<double> triangle::intersect_impl(ray const& r) const {
     auto const alpha = dot_product(ac_d, intersection) / dot_product(ac_d, ab_);
 
     auto const ab_d = cross_product(ab_, r.direction());
-    auto const beta  = dot_product(ab_d, intersection) / dot_product(ab_d, ac_);
+    auto const beta = dot_product(ab_d, intersection) / dot_product(ab_d, ac_);
 
     return t >= 0 && 0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 &&
         alpha + beta <= 1 ? utils::some(t) : utils::none;

@@ -19,7 +19,7 @@ struct vector3d
     double z() const;
 
 private:
-    static size_t const dimension_ = 3;
+    static size_t constexpr dimension_ = 3;
     std::array<double, dimension_> coordinates_;
 };
 
