@@ -11,17 +11,17 @@
 namespace tracer {
 
 struct scene_builder {
-    scene_builder center(linear::point3d const& center) &&;
-    scene_builder up_direction(linear::direction3d const& direction) &&;
-    scene_builder camera_position(linear::point3d const& position) &&;
-    scene_builder focal_distance(double distance) &&;
-    scene_builder screen_size(std::array<double, 2> const& size) &&;
-    scene_builder resolution(std::array<unsigned, 2> const& resolution) &&;
-    scene_builder ambient_light(normalized_color const& light) &&;
-    scene_builder background_color(normalized_color const& background) &&;
+    scene_builder& center(linear::point3d const& center);
+    scene_builder& up_direction(linear::direction3d const& direction);
+    scene_builder& camera_position(linear::point3d const& position);
+    scene_builder& focal_distance(double distance);
+    scene_builder& screen_size(std::array<double, 2> const& size);
+    scene_builder& resolution(std::array<unsigned, 2> const& resolution);
+    scene_builder& ambient_light(normalized_color const& light);
+    scene_builder& background_color(normalized_color const& background);
 
-    scene_builder add_light(light_source const& s) &&;
-    scene_builder add_item(item i) &&;
+    scene_builder& add_light(light_source const& s);
+    scene_builder& add_item(item i);
     scene build() &&;
 
 private:

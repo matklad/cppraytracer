@@ -6,37 +6,37 @@
 
 namespace tracer {
 
-scene_builder scene_builder::center(linear::point3d const& center) &&
-{ center_ = center; return std::move(*this); }
+scene_builder& scene_builder::center(linear::point3d const& center)
+{ center_ = center; return *this; }
 
-scene_builder scene_builder::up_direction(linear::direction3d const& direction) &&
-{ up_direction_ = direction; return std::move(*this); }
+scene_builder& scene_builder::up_direction(linear::direction3d const& direction)
+{ up_direction_ = direction; return *this; }
 
-scene_builder scene_builder::camera_position(linear::point3d const& position) &&
-{ camera_position_ = position; return std::move(*this); }
+scene_builder& scene_builder::camera_position(linear::point3d const& position)
+{ camera_position_ = position; return *this; }
 
-scene_builder scene_builder::focal_distance(double distance) &&
-{ focal_distance_ = distance; return std::move(*this); }
+scene_builder& scene_builder::focal_distance(double distance)
+{ focal_distance_ = distance; return *this; }
 
-scene_builder scene_builder::screen_size(std::array<double, 2> const& size) &&
-{ screen_size_ = size; return std::move(*this); }
+scene_builder& scene_builder::screen_size(std::array<double, 2> const& size)
+{ screen_size_ = size; return *this; }
 
-scene_builder scene_builder::resolution(std::array<unsigned, 2> const& resolution) &&
-{ resolution_ = resolution; return std::move(*this); }
+scene_builder& scene_builder::resolution(std::array<unsigned, 2> const& resolution)
+{ resolution_ = resolution; return *this; }
 
-scene_builder scene_builder::ambient_light(normalized_color const& light) &&
-{ ambient_light_ = light; return std::move(*this); }
+scene_builder& scene_builder::ambient_light(normalized_color const& light)
+{ ambient_light_ = light; return *this; }
 
-scene_builder scene_builder::background_color(normalized_color const& background) &&
-{ background_color_ = background; return std::move(*this); }
+scene_builder& scene_builder::background_color(normalized_color const& background)
+{ background_color_ = background; return *this; }
 
-scene_builder scene_builder::add_light(light_source const& s) &&
-{ lights_.push_back(s); return std::move(*this); }
+scene_builder& scene_builder::add_light(light_source const& s)
+{ lights_.push_back(s); return *this; }
 
-scene_builder scene_builder::add_item(item i) &&
+scene_builder& scene_builder::add_item(item i)
 {
     items_.push_back(std::move(i));
-    return std::move(*this);
+    return *this;
 }
 
 scene scene_builder::build() && {

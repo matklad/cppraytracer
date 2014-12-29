@@ -18,8 +18,9 @@ int main() {
     auto const triangles = parse_obj(ifs);
 
     unsigned const upsampling = 1;
+    scene_builder builder;
 
-    auto builder = scene_builder()
+    builder
         .center({0, 0, 0})
         .up_direction({0, 0, -1})
         .camera_position({0, 40, 90})
@@ -31,7 +32,7 @@ int main() {
         .ambient_light(white);
 
     for (auto const& t: triangles) {
-        builder = std::move(builder).add_item(item::make_triangle(material(red), t));
+        builder.add_item(item::make_triangle(material(red), t));
     }
 
     scene const scene = std::move(builder).build();
