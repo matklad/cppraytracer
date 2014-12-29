@@ -11,11 +11,12 @@ void tracer::write_ppm(std::ostream &os, image const& im) {
     for (auto y = 0u; y < height; ++y) {
         for (auto x = 0u; x < width; ++x)
         {
-            auto const c = im(x, y);
-            char const pixel[3] = {char(c.r() * max_val),
-                                   char(c.g() * max_val),
-                                   char(c.b() * max_val)};
-            os.write(pixel, 3);
+            auto const rgb = im(x, y).to_8_bit_rgb();
+            char buff[3] = {};
+            for (auto i = 0u; i < 3; ++i) {
+                buff[i] = rgb[i];
+            }
+            os.write(buff, 3);
         }
     }
 }

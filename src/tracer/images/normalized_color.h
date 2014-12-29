@@ -1,6 +1,7 @@
 #pragma once
+#include <array>
 
-#include "tracer/images/color.h"
+#include <tracer/images/color.h>
 
 namespace tracer {
 
@@ -13,6 +14,8 @@ struct normalized_color {
     double r() const;
     double g() const;
     double b() const;
+
+    std::array<uint8_t, 3> to_8_bit_rgb() const;
 private:
     color color_;
 };
