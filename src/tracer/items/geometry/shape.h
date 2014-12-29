@@ -1,11 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <memory>
-
 #include <utils/option.h>
-#include <utils/operators.h>
-
 #include <linear/linear.h>
 #include <tracer/light/ray.h>
 

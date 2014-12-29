@@ -1,35 +1,44 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <fstream>
+#include <ctime>
 
 #include <linear/point3d.h>
 #include <tracer/scene/scene.h>
 #include <tracer/scene/scene_builder.h>
 #include <tracer/images/ppm.h>
 #include <tracer/light/light_source.h>
+#include <tracer/parsers/obj_parser.h>
 
 int main() {
     using namespace tracer;
 
-    material const blue{{.1, .1, 1}};
-    material const red{{1, .1, .1}};
-    material const white{{1, 1, 1}};
-    unsigned const upsampling = 2;
+    std::ifstream ifs("utah.obj");
+    auto const triangles = parse_obj(ifs);
 
-    scene const scene = scene_builder()
+    unsigned const upsampling = 1;
+
+    auto builder = scene_builder()
         .center({0, 0, 0})
-        .up_direction({0, 0, 1})
-        .camera_position({-20, 0, 0})
-        .focal_distance(10)
-        .screen_size({{16.0, 12.0}})
+        .up_direction({0, 0, -1})
+        .camera_position({0, 40, 90})
+        .focal_distance(80)
+        .screen_size({{40.0, 30.0}})
         .resolution({{640u * upsampling, 480u * upsampling}})
-        .add_light({normalized_color{{0.7, 0.1, 0.1}}, {-10,  10, 0}})
-        .add_light({normalized_color{{0.1, 0.1, 0.7}}, {-10, -10, 0}})
-        .add_item(item::make_sphere(white, {0,  0, 0}, 1))
-        .add_item(item::make_sphere(white, {0,  8, 0}, 5))
-        .add_item(item::make_sphere(white,  {0, -8, 0}, 5))
-        .ambient_light(normalized_color{{.1, .1, .1}})
-        .build();
+        .add_light({white, {80, 80, 50}})
+        .ambient_light(white);
 
+    for (auto const& t: triangles) {
+        builder = std::move(builder).add_item(item::make_triangle(material(red), t));
+    }
+
+    scene const scene = std::move(builder).build();
+
+    std::time_t start, finish;
+    std::time(&start);
     write_ppm(std::cout, upsample(scene.render(), upsampling));
+    std::time(&finish);
+
+    std::cerr << "time: " << std::difftime(finish, start) << std::endl;
 }

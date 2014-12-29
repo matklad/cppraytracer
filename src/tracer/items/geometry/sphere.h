@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 
 #include <utils/option.h>
 #include <tracer/items/geometry/shape.h>

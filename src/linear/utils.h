@@ -14,4 +14,6 @@ bool is_nearly_zero(double a);
 
 solution solve_quadratic_equation(double a, double b, double c);
 
+double solve_linear_equation(double a, double b);
+
 } // namespace linear

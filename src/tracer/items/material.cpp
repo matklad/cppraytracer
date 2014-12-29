@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <linear/direction3d.h>
 #include <tracer/images/color.h>
 #include <tracer/items/material.h>
@@ -14,7 +16,7 @@ color material::calculate_diffuse_color(
     linear::direction3d const& light_direction,
     linear::direction3d const& normal) const
 {
-    auto const k = dot_product(light_direction, -normal);
+    auto const k = std::max(dot_product(light_direction, -normal), 0.0);
     return color_ * diffuse_light * k;
 }
 

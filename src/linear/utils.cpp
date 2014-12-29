@@ -19,4 +19,7 @@ solution solve_quadratic_equation(double a, double b, double c) {
     return {true, std::min(t1, t2), std::max(t1, t2)};
 }
 
+double solve_linear_equation(double a, double b)
+{ return -b / a; }
+
 } // namespace linear

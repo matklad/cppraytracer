@@ -1,5 +1,6 @@
 #include <tracer/items/geometry/sphere.h>
 #include <utils/option.h>
+#include <linear/linear.h>
 #include <linear/utils.h>
 
 namespace tracer {

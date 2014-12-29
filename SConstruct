@@ -5,7 +5,8 @@ VariantDir('build', 'src', duplicate=0)
 env=Environment(
     CPPPATH='src',
     CXX='clang++',
-    CXXFLAGS='-std=c++14 -Wall -Wextra -Werror',
+    CXXFLAGS='-std=c++14 -Wall -Wextra -Werror -O3 -g -march=native -flto',
+    LINKFLAGS='-flto',
     SCONS_CXX_STANDARD="c++14",
     ENV={'TERM': os.environ['TERM']},
     variant_dir='build'
@@ -19,6 +20,7 @@ paths = [
     'build/tracer/items/materials/*.cpp',
     'build/tracer/items/*.cpp',
     'build/tracer/scene/*.cpp',
+    'build/tracer/parsers/*.cpp',
     'build/tracer/*.cpp',
 ]
 

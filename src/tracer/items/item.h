@@ -4,6 +4,7 @@
 #include <utils/option.h>
 #include <linear/direction3d.h>
 #include <tracer/items/material.h>
+#include <tracer/items/geometry/triangle.h>
 #include <tracer/light/ray.h>
 #include <tracer/images/color.h>
 
@@ -16,6 +17,10 @@ struct item {
     static item make_sphere(material const& material,
                             linear::point3d const& position,
                             double radius);
+    static item make_triangle(material const& material,
+                              std::array<linear::point3d, 3> const& points);
+    static item make_triangle(material const& material, triangle const& t);
+
     item(item&&);
     item& operator=(item&&);
     ~item();

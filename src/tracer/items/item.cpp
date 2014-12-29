@@ -3,6 +3,7 @@
 #include <tracer/items/item.h>
 #include <tracer/items/geometry/shape.h>
 #include <tracer/items/geometry/sphere.h>
+#include <tracer/items/geometry/triangle.h>
 #include <tracer/items/material.h>
 #include <tracer/images/color.h>
 #include <utils/option.h>
@@ -11,9 +12,15 @@ namespace tracer {
 
 item item::make_sphere(material const& material,
                        linear::point3d const& position,
-                       double const radius) {
-    return {material, std::make_unique<sphere>(position, radius)};
-}
+                       double const radius)
+{ return {material, std::make_unique<sphere>(position, radius)}; }
+
+item item::make_triangle(material const& material,
+                         std::array<linear::point3d, 3> const& points)
+{ return {material, std::make_unique<triangle>(points)}; }
+
+item item::make_triangle(material const& material, triangle const& t)
+{ return {material, std::make_unique<triangle>(t)}; }
 
 item::~item() {}
 

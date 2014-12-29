@@ -32,14 +32,12 @@ image scene::render() const {
 }
 
 normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const {
-    normalized_color const background_color{{0.03, 0.03, 0.03}};
+    normalized_color const background_color = blue;
     auto const r = camera_.ray_for_pixel(x, y);
-    if (auto const hit = first_hit(r)) {
-        return normalized_color{calculate_light(*hit)};
-    } else {
-        return background_color;
-    }
-    return normalized_color{trace(r)};
+    auto const hit = first_hit(r);
+    return hit
+        ? normalized_color{calculate_light(*hit)}
+        : background_color;
 }
 
 utils::option<intersection_point> scene::first_hit(ray const& r) const {
@@ -57,11 +55,6 @@ utils::option<intersection_point> scene::first_hit(ray const& r) const {
 color scene::calculate_light(intersection_point const& p) const {
     color sum_color{0, 0, 0};
     sum_color += p.calculate_ambient_color(ambient_light_);
-
-    struct light_source {
-        color color;
-        linear::point3d position;
-    };
 
     for (auto const& l: lights_) {
         auto const light_direction = direction_from_to(l.position(), p);
