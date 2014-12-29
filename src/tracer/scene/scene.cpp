@@ -12,8 +12,8 @@
 namespace tracer {
 
 scene::scene(camera const& camera,
-             normalized_color const& ambient_light,
-             normalized_color const& background_color,
+             color const& ambient_light,
+             color const& background_color,
              std::vector<light_source> lights,
              std::vector<item> items)
     : camera_{camera}
@@ -27,17 +27,17 @@ image scene::render() const {
     image result(camera_.resolution());
     for (auto x = 0u; x < camera_.resolution()[0]; ++x) {
         for (auto y = 0u; y < camera_.resolution()[1]; ++y) {
-            result(x, y) = color_at_pixel(x, y);
+            result(x, y) = normalized_color{color_at_pixel(x, y)};
         }
     }
     return result;
 }
 
-normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const {
+color scene::color_at_pixel(unsigned const x, unsigned const y) const {
     auto const r = camera_.ray_for_pixel(x, y);
     auto const hit = first_hit(r);
     return hit
-        ? normalized_color{calculate_light(*hit)}
+        ? calculate_light(*hit)
         : background_color_;
 }
 
@@ -59,10 +59,10 @@ color scene::calculate_light(intersection_point const& p) const {
 
     for (auto const& l: lights_) {
         auto const light_direction = direction_from_to(l.position(), p);
-        auto const pre_out_ray = ray::from_to(p, l.position());
-        auto const out_ray = ray::from_to(pre_out_ray.point_along(.001), l.position());
+        auto const almost_p = ray::from_to(p, l.position()).point_along(.001);
+        auto const out_ray = ray::from_to(almost_p, l.position());
         if (!first_hit(out_ray)) {
-            sum_color += p.calculate_diffuse_color(l.color(), light_direction);
+            sum_color += p.calculate_diffuse_color(l.light_color(), light_direction);
         }
     }
     return sum_color;

@@ -21,15 +21,14 @@ int main() {
     scene_builder builder;
 
     builder
-        .center({0, 0, 0})
         .up_direction({0, 0, -1})
         .camera_position({0, 40, 90})
         .focal_distance(80)
         .screen_size({{40.0, 30.0}})
         .resolution({{640u * upsampling, 480u * upsampling}})
         .add_light({white, {80, 80, 50}})
-        .background_color(blue)
-        .ambient_light(white);
+        .background_color(blue * .2)
+        .ambient_light(white * .3);
 
     for (auto const& t: triangles) {
         builder.add_item(item::make_triangle(material(red), t));

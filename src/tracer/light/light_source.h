@@ -1,16 +1,16 @@
 #pragma once
 #include <linear/linear.h>
-#include <tracer/images/normalized_color.h>
+#include <tracer/images/color.h>
 
 namespace tracer {
 
 struct light_source {
-    light_source(normalized_color const& color, linear::point3d const& position);
-    normalized_color color() const;
+    light_source(color const& color, linear::point3d const& position);
+    color light_color() const;
     linear::point3d position() const;
 
 private:
-    normalized_color color_;
+    color color_;
     linear::point3d position_;
 };
 

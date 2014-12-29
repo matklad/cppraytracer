@@ -19,19 +19,19 @@ private:
     friend struct scene_builder;
 
     scene(camera const& camera,
-          normalized_color const& ambient_light,
-          normalized_color const& background_color,
+          color const& ambient_light,
+          color const& background_color,
           std::vector<light_source> lights,
           std::vector<item> items);
 
-    normalized_color color_at_pixel(unsigned x, unsigned y) const;
+    color color_at_pixel(unsigned x, unsigned y) const;
     utils::option<intersection_point> first_hit(ray const& r) const;
     color trace(ray const&r) const;
     color calculate_light(intersection_point const& intersection) const;
 
     camera camera_;
-    normalized_color ambient_light_;
-    normalized_color background_color_;
+    color ambient_light_;
+    color background_color_;
     std::vector<light_source> lights_;
     std::vector<item> items_;
 };

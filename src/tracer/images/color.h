@@ -32,5 +32,9 @@ color operator*(color c, double alpha);
 color operator/(double alpha, color c);
 color operator/(color c, double alpha);
 
+const color white({.7, .7, .7});
+const color red({.7, .05, .05});
+const color green({.05, .7, .05});
+const color blue({.05, .05, .7});
 
 } // namespace tracer

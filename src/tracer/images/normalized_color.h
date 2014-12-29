@@ -17,9 +17,4 @@ private:
     color color_;
 };
 
-const normalized_color white({.7, .7, .7});
-const normalized_color red({.7, .05, .05});
-const normalized_color green({.05, .7, .05});
-const normalized_color blue({.05, .05, .7});
-
 } // namespace tracer

@@ -24,10 +24,10 @@ scene_builder& scene_builder::screen_size(std::array<double, 2> const& size)
 scene_builder& scene_builder::resolution(std::array<unsigned, 2> const& resolution)
 { resolution_ = resolution; return *this; }
 
-scene_builder& scene_builder::ambient_light(normalized_color const& light)
+scene_builder& scene_builder::ambient_light(color const& light)
 { ambient_light_ = light; return *this; }
 
-scene_builder& scene_builder::background_color(normalized_color const& background)
+scene_builder& scene_builder::background_color(color const& background)
 { background_color_ = background; return *this; }
 
 scene_builder& scene_builder::add_light(light_source const& s)
