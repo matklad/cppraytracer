@@ -18,6 +18,8 @@ struct scene_builder {
     scene_builder screen_size(std::array<double, 2> const& size) &&;
     scene_builder resolution(std::array<unsigned, 2> const& resolution) &&;
     scene_builder ambient_light(normalized_color const& light) &&;
+    scene_builder background_color(normalized_color const& background) &&;
+
     scene_builder add_light(light_source const& s) &&;
     scene_builder add_item(item i) &&;
     scene build() &&;
@@ -30,6 +32,7 @@ private:
     std::array<double, 2> screen_size_;
     std::array<unsigned, 2> resolution_ = {{640u, 480u}};
     normalized_color ambient_light_;
+    normalized_color background_color_;
     std::vector<light_source> lights_;
     std::vector<item> items_;
 };

@@ -12,11 +12,13 @@
 namespace tracer {
 
 scene::scene(camera const& camera,
-             normalized_color const& ambient_light_,
+             normalized_color const& ambient_light,
+             normalized_color const& background_color,
              std::vector<light_source> lights,
              std::vector<item> items)
     : camera_{camera}
-    , ambient_light_{ambient_light_}
+    , ambient_light_{ambient_light}
+    , background_color_{background_color}
     , lights_{lights}
     , items_{std::move(items)}
 {}
@@ -32,12 +34,11 @@ image scene::render() const {
 }
 
 normalized_color scene::color_at_pixel(unsigned const x, unsigned const y) const {
-    normalized_color const background_color = blue;
     auto const r = camera_.ray_for_pixel(x, y);
     auto const hit = first_hit(r);
     return hit
         ? normalized_color{calculate_light(*hit)}
-        : background_color;
+        : background_color_;
 }
 
 utils::option<intersection_point> scene::first_hit(ray const& r) const {

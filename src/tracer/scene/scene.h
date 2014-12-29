@@ -19,7 +19,8 @@ private:
     friend struct scene_builder;
 
     scene(camera const& camera,
-          normalized_color const& ambient_light_,
+          normalized_color const& ambient_light,
+          normalized_color const& background_color,
           std::vector<light_source> lights,
           std::vector<item> items);
 
@@ -30,6 +31,7 @@ private:
 
     camera camera_;
     normalized_color ambient_light_;
+    normalized_color background_color_;
     std::vector<light_source> lights_;
     std::vector<item> items_;
 };

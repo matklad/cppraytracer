@@ -27,6 +27,7 @@ int main() {
         .screen_size({{40.0, 30.0}})
         .resolution({{640u * upsampling, 480u * upsampling}})
         .add_light({white, {80, 80, 50}})
+        .background_color(blue)
         .ambient_light(white);
 
     for (auto const& t: triangles) {

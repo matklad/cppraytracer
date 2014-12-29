@@ -14,10 +14,9 @@ private:
     utils::option<double> intersect_impl(ray const& r) const override;
     linear::direction3d normal_at_impl(linear::point3d const& p) const override;
 
-    linear::vector3d ab() const;
-    linear::vector3d ac() const;
-
-    std::array<linear::point3d, 3> points_;
+    linear::point3d a_;
+    linear::vector3d ab_;
+    linear::vector3d ac_;
 };
 
 } // namespace tracer
