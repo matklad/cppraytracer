@@ -26,7 +26,7 @@ int main() {
         .camera_position({0, 40, 90})
         .focal_distance(80)
         .screen_size({{40.0, 30.0}})
-        .resolution({{64u * upsampling, 48u * upsampling}})
+        .resolution({{640u * upsampling, 480u * upsampling}})
         .add_light({white, {80, 80, 50}})
         .background_color(blue * .2)
         .ambient_light(white * .3);
@@ -40,7 +40,7 @@ int main() {
     std::time_t start, finish;
     std::time(&start);
     auto const im = upsample(scene.render(), upsampling);
-    write_terminal_escape(std::cout, im);
+    write_ppm(std::cout, im);
     std::time(&finish);
 
     std::cerr << "time: " << std::difftime(finish, start) << std::endl;
