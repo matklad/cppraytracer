@@ -10,6 +10,8 @@ struct vector3d
     : private utils::add_sub<vector3d>
 {
     vector3d(double x, double y, double z);
+    explicit vector3d(std::array<double, 3> const& coords);
+
     vector3d();
     vector3d& operator+=(vector3d const& rhs);
     vector3d& operator-=(vector3d const& rhs);
@@ -26,6 +28,7 @@ private:
 double length(vector3d const& v);
 double dot_product(vector3d const& a, vector3d const& b);
 vector3d cross_product(vector3d const& a, vector3d const& b);
+vector3d projection(vector3d const& a, vector3d const& b);
 
 vector3d operator-(vector3d const& v);
 

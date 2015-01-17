@@ -10,6 +10,10 @@ vector3d::vector3d(double const x, double const y, double const z)
     : coordinates_{{x, y, z}}
 {}
 
+vector3d::vector3d(std::array<double, 3> const& coords)
+    : coordinates_(coords)
+{}
+
 vector3d::vector3d()
     : vector3d{0.0, 0.0, 0.0}
 {}
@@ -47,6 +51,8 @@ vector3d cross_product(vector3d const& a, vector3d const& b)
     };
 }
 
+vector3d projection(vector3d const& a, vector3d const& b)
+{ return a * (dot_product(a, b) / dot_product(a, a)); }
 
 vector3d operator-(vector3d const& v)
 { return vector3d{-v.x(), -v.y(), -v.z()}; }

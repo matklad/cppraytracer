@@ -15,10 +15,6 @@ item item::make_sphere(material const& material,
                        double const radius)
 { return {material, std::make_unique<sphere>(position, radius)}; }
 
-item item::make_triangle(material const& material,
-                         std::array<linear::point3d, 3> const& points)
-{ return {material, std::make_unique<triangle>(points)}; }
-
 item item::make_triangle(material const& material, triangle const& t)
 { return {material, std::make_unique<triangle>(t)}; }
 

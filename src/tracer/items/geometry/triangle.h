@@ -8,7 +8,11 @@
 namespace tracer {
 
 struct triangle: shape {
-    triangle(std::array<linear::point3d, 3> const& points);
+    template<typename T>
+    using array3 = std::array<T, 3>;
+
+    triangle(array3<linear::point3d> const& points,
+             array3<linear::direction3d> const& normals);
 
 private:
     utils::option<double> intersect_impl(ray const& r) const override;
@@ -17,6 +21,7 @@ private:
     linear::point3d a_;
     linear::vector3d ab_;
     linear::vector3d ac_;
+    array3<linear::direction3d> normals_;
 };
 
 } // namespace tracer

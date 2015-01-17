@@ -17,8 +17,6 @@ struct item {
     static item make_sphere(material const& material,
                             linear::point3d const& position,
                             double radius);
-    static item make_triangle(material const& material,
-                              std::array<linear::point3d, 3> const& points);
     static item make_triangle(material const& material, triangle const& t);
 
     item(item&&);
