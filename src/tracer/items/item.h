@@ -44,6 +44,9 @@ struct intersection_point
     color calculate_ambient_color(color const& ambient_light) const;
     color calculate_diffuse_color(color const& diffuse_light,
                                   linear::direction3d const& direction) const;
+    color calculate_specular_color(color const& specular_light,
+                                   linear::direction3d const& light_direction) const;
+
 private:
     friend struct item;
     intersection_point(double t, ray const& ray, item const& item);

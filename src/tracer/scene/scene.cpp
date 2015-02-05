@@ -62,7 +62,11 @@ color scene::calculate_light(intersection_point const& p) const {
         auto const almost_p = ray::from_to(p, l.position()).point_along(.001);
         auto const out_ray = ray::from_to(almost_p, l.position());
         if (!first_hit(out_ray)) {
-            sum_color += p.calculate_diffuse_color(l.light_color(), light_direction);
+            sum_color += p.calculate_diffuse_color(l.light_color(),
+                                                   light_direction);
+            sum_color += p.calculate_specular_color(l.light_color(),
+                                                    light_direction);
+
         }
     }
     return sum_color;

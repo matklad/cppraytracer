@@ -65,14 +65,27 @@ bool intersection_point::operator<(intersection_point const& rhs) const
 color intersection_point::calculate_ambient_color(color const& ambient_light) const
 { return item_.material_.calculate_ambient_color(ambient_light); }
 
-color intersection_point::calculate_diffuse_color(color const& diffuse_light,
-                                    linear::direction3d const& direction) const
+color intersection_point::calculate_diffuse_color(
+    color const& diffuse_light,
+    linear::direction3d const& direction) const
 {
     auto const normal = item_.normal_at(*this);
     return item_.material_.calculate_diffuse_color(
         diffuse_light,
         direction,
         normal);
+}
+
+color intersection_point::calculate_specular_color(
+    color const& specular_light,
+    linear::direction3d const& light_direction) const
+{
+    auto const normal = item_.normal_at(*this);
+    return item_.material_.calculate_specular_color(
+        specular_light,
+        light_direction,
+        normal,
+        ray_.direction());
 }
 
 } // namespace tracer

@@ -20,4 +20,17 @@ color material::calculate_diffuse_color(
     return color_ * diffuse_light * k;
 }
 
+color material::calculate_specular_color(
+    color const& speculat_light,
+    linear::direction3d const& light_direction,
+    linear::direction3d const& normal,
+    linear::direction3d const& view_direction) const
+{
+    auto const n_proj = -projection(normal, light_direction);
+    auto const reflected_light = 2 * n_proj + light_direction;
+    auto const k = std::max(dot_product(view_direction, -reflected_light), 0.0);
+    std::cerr << k << "\n";
+    return speculat_light * k;
+}
+
 } // namespace tracer

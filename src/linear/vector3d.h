@@ -28,7 +28,7 @@ private:
 double length(vector3d const& v);
 double dot_product(vector3d const& a, vector3d const& b);
 vector3d cross_product(vector3d const& a, vector3d const& b);
-vector3d projection(vector3d const& a, vector3d const& b);
+vector3d projection(vector3d const& to, vector3d const& from);
 
 vector3d operator-(vector3d const& v);
 
