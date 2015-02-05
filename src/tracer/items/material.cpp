@@ -29,7 +29,6 @@ color material::calculate_specular_color(
     auto const n_proj = -projection(normal, light_direction);
     auto const reflected_light = 2 * n_proj + light_direction;
     auto const k = std::max(dot_product(view_direction, -reflected_light), 0.0);
-    std::cerr << k << "\n";
     return speculat_light * k;
 }
 
