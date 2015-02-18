@@ -20,12 +20,12 @@ item item::make_triangle(material const& material, triangle const& t)
 
 item::~item() {}
 
-item::item(item&& other)
+item::item(item&& other) noexcept
     : shape_(std::move(other.shape_))
     , material_(std::move(other.material_))
 {}
 
-item& item::operator=(item&& other) {
+item& item::operator=(item&& other) noexcept {
     shape_ = std::move(other.shape_);
     material_ = std::move(other.material_);
     return *this;

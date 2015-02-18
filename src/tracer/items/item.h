@@ -19,8 +19,8 @@ struct item {
                             double radius);
     static item make_triangle(material const& material, triangle const& t);
 
-    item(item&&);
-    item& operator=(item&&);
+    item(item&&) noexcept;
+    item& operator=(item&&) noexcept;
     ~item();
 
     utils::option<intersection_point> intersect(ray const& r) const;

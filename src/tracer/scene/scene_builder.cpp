@@ -44,9 +44,9 @@ scene scene_builder::build() && {
         direction_from_to(camera_position_, center_);
 
     auto const right_direction =
-        cross_product(view_direction, up_direction_);
+        linear::direction3d{cross_product(view_direction, up_direction_)};
     auto const true_up_direction =
-        cross_product(right_direction, view_direction);
+        linear::direction3d{cross_product(right_direction, view_direction)};
 
     camera const cam{
         camera_position_,

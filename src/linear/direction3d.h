@@ -14,8 +14,6 @@ private:
     vector3d directrion_;
 };
 
-direction3d cross_product(direction3d const& a, direction3d const& b);
-
 direction3d direction_from_to(point3d const& from, point3d const& to);
 
 } // namespace linear
